@@ -180,18 +180,20 @@ async function enviarRegistros() {
 
       <data-table :data="Tabla.data" :header="Tabla.header" :loading="LoadingTabla" :filter="true">
         <template #body_ope="{ value, row }">
-          <RoundButton bgFondoColor="yellow-8" 
-            @click="$router.push('vehiculo/register/'+row.id)" icon="border_color" 
-            title="Editar" text-color="white" />
-          <RoundButton bgFondoColor="danger" title="Eliminar" 
-          icon="delete_sweep" text-color="white" 
-          @click="_fnConfirmacion(value)"/>
+          <div class="flex" style="width: 6rem;">
+            <RoundButton bgFondoColor="yellow-8" @click="$router.push('vehiculo/register/' + row.id)" icon="border_color"
+              title="Editar" text-color="white" />
+            <RoundButton bgFondoColor="danger" title="Eliminar" icon="delete_sweep" text-color="white"
+              @click="_fnConfirmacion(value)" />
+            <RoundButton bgFondoColor="primary" title="Agregar Documentos" icon="add" text-color="white"
+              @click="_fnConfirmacion(value)" />
+          </div>
         </template>
         <template #body_fechaVencTarjetaCirculacion="{ value, row }">
-         {{ formatDate(value,3) }}
+          {{ formatDate(value, 3) }}
         </template>
         <template #body_fechaVencTarjetaPropiedad="{ value, row }">
-          {{ formatDate(value,3) }}
+          {{ formatDate(value, 3) }}
         </template>
       </data-table>
     </q-card-section>

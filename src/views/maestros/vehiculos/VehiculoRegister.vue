@@ -177,8 +177,9 @@ function _fnChangeArchivo(evt: any) {
    const file = files[0]
    _state.form.fotografiaFile = file
 }
-
+//*LOS ARCHIVOS SON PDF WORD E IMAGENES
 </script>
+
 
 
 <template>
