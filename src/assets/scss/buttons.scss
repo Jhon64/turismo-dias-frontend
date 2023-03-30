@@ -1,0 +1,40 @@
+.btn-outline-primary{
+    border-color: #69ABAC !important;
+    color: #69ABAC !important;
+}
+
+.btn-outline-primary:hover{
+    background-color: #69ABAC !important;
+    color: white !important;
+}
+
+.btn-outline-primary:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 15px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+// .btn-outline-danger{
+//     border-color: #69ABAC !important;
+//     color: #69ABAC !important;
+// }
+
+// .btn-outline-danger:hover{
+//     background-color: #69ABAC !important;
+//     color: white !important;
+// }
+
+.btn-outline-danger:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 15px 50px 0 rgba(0,0,0,0.19);
+}
+
+.bg-custom-primary{
+    background-color: $color-primary !important;
+  }
+  
+.bg-custom-secondary{
+    background-color: $color-secondary !important;
+}
+
+.bg-custom-tertiary{
+    background-color: $color-tertiary !important;
+}

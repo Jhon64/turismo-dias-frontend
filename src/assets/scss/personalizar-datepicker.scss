@@ -1,0 +1,54 @@
+@import './constants.scss';
+.qs-datepicker-container {
+  width: 100%;
+  font-size: 13px;
+  box-shadow:  1px 1px  rgba(255,255,255,.3);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  .qs-datepicker {
+    .qs-controls {
+      color: white;
+      width: 100%;
+      background:$color-theme;
+      padding: 5px 0;
+      font-weight: 500 !important;
+
+      .qs-month-year:hover {
+        border-bottom: 1px solid white;
+      }
+
+      .qs-arrow.qs-left:after {
+        border-right-color: white
+      }
+
+      .qs-arrow.qs-right:after {
+        border-left-color: white
+      }
+    }
+
+    .qs-square {
+      .qs-day {
+        font-weight: lighter !important;
+        border-bottom: 1px solid;
+        border-radius: 0;
+        padding: 10px 0 !important;
+        margin-top: 0 !important;
+      }
+    }
+
+    .qs-square.qs-num {
+      font-size: 12px;
+      font-weight: 100 !important;
+      color: #0000008f
+    }
+
+    .qs-square.qs-active {
+      background:$color-theme;
+      color: white;
+    }
+
+    .qs-square:not(.qs-empty):not(.qs-disabled):not(.qs-day):not(.qs-active):hover {
+      background: $color-theme;
+      color: white;
+    }
+  }
+}

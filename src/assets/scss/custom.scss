@@ -1,0 +1,17 @@
+//*mis estilos propios
+//*posicionamiento
+
+.end-1{right: 0.25rem;}.end-2{right: 0.5rem;}.end-3{right: 0.75rem;}.end-4{right: 0.1rem;}
+.top-1{top: 0.25rem;}.top-2{top: 0.5rem;}.top-3{top: 0.75rem;}.top-4{top: 0.1rem;}
+
+//todo: estilos para el calendario
+.calendar-component{
+   .calendar{
+      .icon-calendar{
+         background: #ddd;
+         border-right: 1px solid #ddd;
+         padding: 0.26rem 0.35rem;
+         border-radius: 0 5px 5px 0;
+      }
+   }
+}
