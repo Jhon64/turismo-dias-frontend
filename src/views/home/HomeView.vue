@@ -5,16 +5,11 @@ import useVuelidate from "@vuelidate/core";
 import { minLength, required } from "@vuelidate/validators";
 import DataTable from "@components/DataTable/DataTable.vue";
 import ModalComponent from "@components/Modal.vue";
-import Chart, {
-  type ChartConfiguration,
-  type ChartData,
-  type ChartItem,
-} from "chart.js/auto";
 
 import "chartjs-adapter-moment";
 import { TOASTR } from "@/helpers/Alerts/Toastr";
 import "./HomeView.scss";
-import ChartGraphs from "@/components/DashBoard/ChartGraphs.vue";
+
 import type { TipoOperaciones } from "@/common/@types/TipoOperaciones";
 import SelectCustom from "@/components/selects/SelectCustom.vue";
 import type { DatatableType } from "@/common/@types/datatable";
