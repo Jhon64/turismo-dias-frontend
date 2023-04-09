@@ -34,7 +34,7 @@
 
    &:hover {
       cursor: pointer;
-      color: white;
+      color: white !important;
       background: rgba(175, 174, 174, .6);
    }
 }
@@ -62,15 +62,31 @@
 <template>
    <div :class="props.label ? 'form-group' : ''">
       <label v-if="props.label" class="form-label mb-0 text-muted">{{ props.label }}</label>
-      <div class="w-100 file-component flex items-center flex-column justify-center py-2 px-2">
-         <div class="icon-upload fa fa-upload " v-if="!_state.files" @click="$event => { _inputFile.click() }"
+      <div v-if="!props.multiple" class="w-100 file-component flex items-center flex-column justify-center py-2 px-2">
+         <div class="icon-upload fa fa-upload " v-if="!_state.file" @click="$event => { _inputFile.click() }"
             style="font-size: 1.5rem;"></div>
-         <div class="icon-cancel fa fa-times " v-if="_state.files"
-            @click="$event => { _state.files = null; _inputFile.value = null }"></div>
-         <img class="img-file-preview" v-if="_state.files" :src="(_state.urlIconPrev)" />
-         <label class='block mb-0 text-muted' v-if="!_state.files">Seleccione archivos</label>
-         <div v-if="!props.multiple && _state.files">
-            <label class='block mb-0 text-muted'>{{ _state.files?.name || 'Error al cargar archivo' }} </label>
+         <div class="icon-cancel text-muted fa fa-times " v-if="_state.file"
+            @click="$event => { _state.files = []; _inputFile.value = null }"></div>
+         <img class="img-file-preview" v-if="_state.file" :src="(_state.urlIconPrev)" />
+         <label class='block mb-0 text-muted' v-if="!_state.file">Seleccione archivos</label>
+         <div v-if="!props.multiple && _state.file">
+            <label class='block mb-0 text-muted'>{{ _state.file?.name || 'Error al cargar archivo' }} </label>
+         </div>
+      </div>
+      <div v-else class="multiple flex wrap">
+         <div class="w-04x m-1 file-component flex items-center flex-column justify-center py-2 px-2">
+            <div class="icon-upload fa fa-upload " @click="$event => { _inputFile.click() }" style="font-size: 1.5rem;">
+            </div>
+            <div class="icon-cancel fa fa-times text-muted" v-if="_state.files.length"
+               @click="$event => { _state.files = []; _inputFile.value = null }"></div>
+            <label class='block mb-0 text-muted'>Seleccione archivos</label>
+         </div>
+         <div v-for="(_file, i) in _state.files"
+            class="w-04x m-1 file-component flex items-center flex-column justify-center py-2 px-2 relative">
+            <div class="icon-cancel fa fa-times text-muted" v-if="_state.files.length"
+               @click="$event => { _fnRemoveFile(i) }"></div>
+            <img class="img-file-preview" :src="(_state.iconsPrevList[i])" />
+            <label class='block mb-0 text-muted'>{{ _file?.name || 'Error al cargar archivo' }} </label>
          </div>
       </div>
    </div>
@@ -80,33 +96,49 @@
 
 <script  setup lang="ts">
 import { reactive, ref } from 'vue';
-const _state = reactive({ files: null as any, urlIconPrev: "/assets/img/img.svg" })
+const _state = reactive({
+   file: null as any, files: [] as File[],
+   iconsPrevList: [] as string[],
+   urlIconPrev: "/assets/img/img.svg"
+})
 const _inputFile = ref<any>(null)
 const props = defineProps<{
    label?: string
    class?: string
    icon?: string
-   single?: boolean
    multiple?: boolean
 }>()
 
 //todo:EMITS
-const fileEmit = defineEmits<{ (e: "getFile", files: File | FileList|null): void }>();
+const fileEmit = defineEmits<{ (e: "getFile", files: File | File[] | null): void }>();
 
 //todo: FUNCIONES 
 const _fnValidarPrevImg = (filename: string) => {
    const data = filename.split(".");
    const extension = data[data.length - 1];
-
+   let urlIcon = "/assets/img/img.svg"
    const lower = extension.toLowerCase();
    if (lower == "jpg" || lower == "jpeg" || lower == "png") {
-      _state.urlIconPrev = "/assets/img/img.svg"
+      urlIcon = "/assets/img/img.svg"
    } else if (lower == "doc" || lower == "docx") {
-      _state.urlIconPrev = "/assets/img/docx.svg"
+      urlIcon = "/assets/img/docx.svg"
    } else if (lower == "xls" || lower == "xlsx") {
-      _state.urlIconPrev = "/assets/img/xlsx.svg"
+      urlIcon = "/assets/img/xlsx.svg"
    } else if (lower == "pdf") {
-      _state.urlIconPrev = "/assets/img/pdf.svg"
+      urlIcon = "/assets/img/pdf.svg"
+   }
+   if (props.multiple) {
+      _state.iconsPrevList.push(urlIcon)
+   } else { urlIcon = _state.urlIconPrev }
+}
+
+const _fnRemoveFile = (index: number) => {
+   if (_state.files.length == 1) {
+      _state.files = []
+      _state.iconsPrevList = []
+   } else {
+      _state.files.splice(index, 1)
+      _state.iconsPrevList.splice(index, 1)
    }
 }
 
@@ -115,14 +147,26 @@ const _fnOnChangeHandle = (event: any) => {
    if (!props.multiple) {//*solo cargamos un archivo
       const singleFile = files[0]
       if (singleFile) {
-         _state.files = singleFile
-         _fnValidarPrevImg(_state.files?.name)
+         _state.file = singleFile
+         _fnValidarPrevImg(_state.file?.name)
       } else {
-         _state.files = null; _inputFile.value = null
+         _state.file = null;
+         _inputFile.value = null
       }
+   } else {
+      if (_state.files) {
+         for (let file of files) {
+            _state.files.push(file)
+            _fnValidarPrevImg(file?.name)
+         }
 
+      } else {
+         _state.files = [];
+         _state.iconsPrevList = []
+         _inputFile.value = null
+      }
    }
-   fileEmit('getFile',_state.files)
+   fileEmit('getFile', !props.multiple ? _state.files : _state.files)
 }
 
 </script>

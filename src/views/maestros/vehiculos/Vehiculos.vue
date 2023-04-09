@@ -185,8 +185,8 @@ async function enviarRegistros() {
               title="Editar" text-color="white" />
             <RoundButton bgFondoColor="danger" title="Eliminar" icon="delete_sweep" text-color="white"
               @click="_fnConfirmacion(value)" />
-            <RoundButton bgFondoColor="primary" title="Agregar Documentos" icon="add" text-color="white"
-              @click="_fnConfirmacion(value)" />
+            <RoundButton bgFondoColor="primary" title="Agregar Documentos" icon="fa fa-file-alt" text-color="white" 
+            @click="$event=>$router.push(`vehiculos/${row.id}/documentos`)"/>
           </div>
         </template>
         <template #body_fechaVencTarjetaCirculacion="{ value, row }">

@@ -14,6 +14,7 @@ import VehiculoView from "@/views/maestros/vehiculos/Vehiculos.vue";
 import VehiculoRegisterView from "@/views/maestros/vehiculos/VehiculoRegister.vue";
 import CombustibleView from "@/views/maestros/combustible/Combustible.vue";
 import GrupoView from "@/views/maestros/grupo/Grupo.vue";
+import DocumentosView from "@/views/maestros/vehiculos/Documentos.vue";
 
 import LogoutView from "@/views/auth/LogoutView.vue";
 
@@ -40,6 +41,7 @@ const router = createRouter({
         { path: "modelos", component: ModelosView },
         { path: "vehiculos", component: VehiculoView },
         { path: "vehiculo/register", component: VehiculoRegisterView },
+        { path: "vehiculos/:id/documentos", component: DocumentosView },
         { path: "vehiculo/register/:id", component: VehiculoRegisterView },
         { path: "combustible", component: CombustibleView },
         { path: "grupo", component: GrupoView },

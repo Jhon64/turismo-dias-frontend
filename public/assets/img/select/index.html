@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Select</title>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<style>
+body {
+font-family: 'Montserrat', sans-serif;
+font-size: 14px;
+color: #666666;
+}
+select {
+background-image: url(flecha.png); /*aquí deberás escribir la ruta de la imagen que utilizarás como flecha del desplegable*/
+background-repeat: no-repeat;
+background-position: right center;
+-webkit-appearance: none;
+-moz-appearance: none;
+-o-appearance: none;
+appearance: none; 
+}
+select::-ms-expand {
+display: none; /*Evita que se muestre la flecha por defecto en versiones de IE*/
+}
+.formulario {
+max-width: 580px;
+margin: auto;
+}
+.campo {
+background-color: #ebebeb;
+border: none;
+-webkit-box-shadow: 0 5px 0 0 #d7d7d7;
+box-shadow: 0 5px 0 0 #d7d7d7;
+padding: 10px;
+width: 100%;
+box-sizing :border-box;
+-webkit-box-sizing: border-box;
+-ms-box-sizing: border-box;
+-moz-box-sizing: border-box;
+-o-box-sizing: border-box;
+-webkit-border-radius: 5px 5px 5px 5px;
+border-radius: 5px 5px 5px 5px;
+font-family: 'Montserrat', sans-serif;
+font-size: 14px;
+color: #666666;
+height: 40px;
+margin: 0 0 10px 0;
+}
+input[type="submit"] {
+border: none;
+background-color: #ea0023;
+color: #FFF;
+padding: 10px 30px 10px 30px;
+-webkit-box-shadow: 0 5px 0 0 #b2272d;
+box-shadow: 0 5px 0 0 #b2272d;
+-webkit-border-radius: 5px 5px 5px 5px;
+border-radius: 5px 5px 5px 5px;
+font-size: 14px;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+-ms-transition: all 0.5s ease;
+-o-transition: all 0.5s ease;
+transition: all 0.5s ease;
+margin: 10px 0 0 0;
+}
+input[type="submit"]:hover {
+border: none;
+background-color: #b2272d;
+color: #FFF;
+padding: 10px 30px 10px 30px;
+-webkit-box-shadow: 0 5px 0 0 #891f27;
+box-shadow: 0 5px 0 0 #891f27;
+-webkit-border-radius: 5px 5px 5px 5px;
+border-radius: 5px 5px 5px 5px;
+font-size: 14px;
+-webkit-transition: all 0.5s ease;
+-moz-transition: all 0.5s ease;
+-ms-transition: all 0.5s ease;
+-o-transition: all 0.5s ease;
+transition: all 0.5s ease;
+margin: 10px 0 0 0;
+}
+</style>
+</head>
+<body>
+<div class="formulario">
+<form method="post" id="formulario">
+<p>Nombre:</p>
+<p><input name="nombre" type="text" class="campo" id="nombre"></p>
+<p>Apellidos:</p>
+<p><input name="apellidos" type="text" class="campo" id="apellidos"></p>
+<p>Teléfono:</p>
+<p><input name="telefono" type="text" class="campo" id="telefono"></p>
+<p>Email:</p>
+<p><input name="email" type="text" class="campo" id="email"></p>
+<p>Seleccione una opción:</p>
+<p><select name="seleccion" class="campo" id="seleccion">
+<option value="0">Seleccione...</option>
+<option value="Opción 1">Opción 1</option>
+<option value="Opción 2">Opción 2</option>
+<option value="Opción 3">Opción 3</option>
+</select></p>
+<input name="Enviar" type="submit" value="Enviar" />
+</form>
+</div>
+</body>
+</html>
